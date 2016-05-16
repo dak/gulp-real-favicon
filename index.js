@@ -18,14 +18,19 @@ module.exports = {
       settings: params.settings,
       versioning: params.versioning
     });
+    
+    gutil.log(request);
 
     rfg.generateFavicon(request, params.dest, function(err, data) {
+      gutil.log(data);
       if (err) {
         throw new gutil.PluginError({
           plugin: PLUGIN_NAME,
           message: err
         });
       }
+      
+      gutil.log(JSON.stringify(data));
 
       fs.writeFileSync(params.markupFile, JSON.stringify(data));
 
